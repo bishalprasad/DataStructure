@@ -42,6 +42,22 @@ int lps(string s1,int m)
     return t[m][m];
 
 }
+int minimumnumberofdeltomakepelindrome(string s1,int m)
+{
+        string s2 = string(s1.rbegin(),s1.rend());
+    int t[m+1][m+1];
+    int i,j;
+    for(i =0;i<=m;i++)
+        for(j=0;j<=m;j++)
+    {
+        if(i == 0||j == 0)
+            t[i][j] = 0;
+        else if(s1[i-1] == s2[j-1])
+            t[i][j] = 1+t[i-1][j-1];
+        else t[i][j] = max(t[i-1][j],t[i][j-1]);
+    }
+    return (m-t[m][m]);
+}
 
 int main()
 {
@@ -54,6 +70,7 @@ int main()
     minimumindel(s1,s2,m,n);
     string s = "GEEKSFORGEEKS";
     n = s.size();
-    cout<<"Lps of s= "<<s<<"is=  "<< lps(s,n);
+    cout<<"Lps of s= "<<s<<"is=  "<< lps(s,n)<<endl;
+    cout<<"minimum nember of delition to make string pelindrome:"<<minimumnumberofdeltomakepelindrome(s,n);
     return 0;
 }
